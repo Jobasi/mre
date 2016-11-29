@@ -1,0 +1,64 @@
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+          http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+    version="3.0">
+
+  <display-name>Bochum Web Application</display-name>
+  
+  
+  <context-param>
+	<param-name>contextConfigLocation</param-name>
+	<param-value>/WEB-INF/applicationContext.xml</param-value>
+  </context-param>
+  <listener>
+     <listener-class>
+         org.springframework.web.context.ContextLoaderListener
+     </listener-class>
+  </listener> 
+  
+
+  <servlet>
+    <servlet-name>CustomerService</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <init-param>
+        <param-name>jersey.config.server.provider.packages</param-name>
+        <param-value>restful</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  
+  
+  
+  <servlet>
+  	<servlet-name>CreateCustomer</servlet-name>
+
+  	<servlet-class>servlets.CreateCustomer</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>DeleteCustomer</servlet-name>
+
+  	<servlet-class>servlets.DeleteCustomer</servlet-class>
+  </servlet>
+  <servlet>
+  	<servlet-name>EditCustomer</servlet-name>
+  	<servlet-class>servlets.EditCustomer</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>CreateCustomer</servlet-name>
+  	<url-pattern>/customer</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>DeleteCustomer</servlet-name>
+  	<url-pattern>/delete/*</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>EditCustomer</servlet-name>
+  	<url-pattern>/edit/*</url-pattern>
+  </servlet-mapping> 
+  
+  <servlet-mapping>
+    <servlet-name>CustomerService</servlet-name>
+    <url-pattern>/api/*</url-pattern>
+  </servlet-mapping>
+</web-app>
